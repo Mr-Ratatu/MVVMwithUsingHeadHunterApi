@@ -2,8 +2,8 @@ package com.headhunter.client.viewmodel;
 
 import android.app.Application;
 
-import com.headhunter.client.HeadHunterSourceFactory;
-import com.headhunter.client.MyPositionalDataSource;
+import com.headhunter.client.data.source.HeadHunterSourceFactory;
+import com.headhunter.client.data.source.MyPositionalDataSource;
 import com.headhunter.client.data.model.ItemHunter;
 
 import java.util.List;
