@@ -12,15 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.AsyncDifferConfig;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class HeadHunterAdapter extends RecyclerView.Adapter<HeadHunterAdapter.HeadHunterViewHolder> {
+public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAdapter.HeadHunterViewHolder> {
 
-    private List<ItemHunter> list = new ArrayList<>();
 
-    public void setList(List<ItemHunter> list) {
-        this.list = list;
-        notifyDataSetChanged();
+    public HeadHunterAdapter() {
+        super(ItemHunter.CALLBACK);
     }
 
     @NonNull
@@ -32,14 +33,9 @@ public class HeadHunterAdapter extends RecyclerView.Adapter<HeadHunterAdapter.He
 
     @Override
     public void onBindViewHolder(@NonNull HeadHunterViewHolder holder, int position) {
-        ItemHunter item = list.get(position);
+        ItemHunter item = getItem(position);
 
         holder.bind(item);
-    }
-
-    @Override
-    public int getItemCount() {
-        return list.size();
     }
 
     class HeadHunterViewHolder extends RecyclerView.ViewHolder {

@@ -4,6 +4,9 @@ package com.headhunter.client.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
 public class ItemHunter {
 
     @SerializedName("id")
@@ -62,4 +65,16 @@ public class ItemHunter {
         this.snippet = snippet;
     }
 
+    public static final DiffUtil.ItemCallback<ItemHunter> CALLBACK = new DiffUtil.ItemCallback<ItemHunter>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull ItemHunter oldItem, @NonNull ItemHunter newItem) {
+            return oldItem.id == newItem.id;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull ItemHunter oldItem, @NonNull ItemHunter newItem) {
+            return false;
+        }
+
+    };
 }

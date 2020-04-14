@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.headhunter.client.viewmodel.HeadHunterViewModel;
 import com.headhunter.client.viewmodel.HunterViewModelFactory;
 
 import java.util.List;
+import java.util.concurrent.Executors;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,12 +39,7 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        downloadData = view.findViewById(R.id.download_data);
-        recyclerView = view.findViewById(R.id.recycler_view);
-        headHunterAdapter = new HeadHunterAdapter();
-
-        recyclerView.setAdapter(headHunterAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        initializeRecyclerView(view);
 
         headHunterViewModel = new ViewModelProvider(this, new HunterViewModelFactory(getActivity().getApplication(),
                 1, "Android", 1)).get(HeadHunterViewModel.class);
@@ -50,15 +47,25 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    private void initializeRecyclerView(View view) {
+        downloadData = view.findViewById(R.id.download_data);
+        recyclerView = view.findViewById(R.id.recycler_view);
+
+        headHunterAdapter = new HeadHunterAdapter();
+
+        recyclerView.setAdapter(headHunterAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        headHunterViewModel.getMutableLiveData().observe(this, new Observer<List<ItemHunter>>() {
+        headHunterViewModel.getPagedListLiveData().observe(this, new Observer<PagedList<ItemHunter>>() {
             @Override
-            public void onChanged(List<ItemHunter> itemHunters) {
-                List<ItemHunter> list = itemHunters;
-                headHunterAdapter.setList(list);
+            public void onChanged(PagedList<ItemHunter> itemHunters) {
+                headHunterAdapter.submitList(itemHunters);
+                recyclerView.setAdapter(headHunterAdapter);
                 visibilityData();
             }
         });
