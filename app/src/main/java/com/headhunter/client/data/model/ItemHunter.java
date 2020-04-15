@@ -6,9 +6,16 @@ import com.google.gson.annotations.SerializedName;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
+@Entity(tableName = "item_db")
 public class ItemHunter {
 
+    @PrimaryKey(autoGenerate = true)
+    private long _id;
     @SerializedName("id")
     @Expose
     private String id;
@@ -16,14 +23,25 @@ public class ItemHunter {
     @Expose
     private String name;
     @SerializedName("salary")
+    @Embedded
     @Expose
     private Salary salary;
     @SerializedName("employer")
+    @Embedded
     @Expose
     private Employer employer;
     @SerializedName("snippet")
+    @Embedded
     @Expose
     private Snippet snippet;
+
+    public long get_id() {
+        return _id;
+    }
+
+    public void set_id(long _id) {
+        this._id = _id;
+    }
 
     public String getId() {
         return id;

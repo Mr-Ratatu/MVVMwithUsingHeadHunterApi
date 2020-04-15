@@ -1,8 +1,10 @@
 package com.headhunter.client.adapter;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.headhunter.client.R;
@@ -19,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAdapter.HeadHunterViewHolder> {
 
+    private OnAdapterClickListener onAdapterClickListener;
 
-    public HeadHunterAdapter() {
+    public HeadHunterAdapter(OnAdapterClickListener onAdapterClickListener) {
         super(ItemHunter.CALLBACK);
+        this.onAdapterClickListener = onAdapterClickListener;
     }
 
     @NonNull
@@ -38,11 +42,12 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
         holder.bind(item);
     }
 
-    class HeadHunterViewHolder extends RecyclerView.ViewHolder {
+    class HeadHunterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView titleVacancy;
         private TextView companyName;
         private TextView description;
+        private ImageView addToFavourite;
 
         public HeadHunterViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -50,12 +55,26 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
             titleVacancy = itemView.findViewById(R.id.title_vacancy);
             companyName = itemView.findViewById(R.id.company_name);
             description = itemView.findViewById(R.id.description);
+            addToFavourite = itemView.findViewById(R.id.add_to_favourite);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bind(ItemHunter item) {
             titleVacancy.setText(item.getName());
             companyName.setText(item.getEmployer().getName());
             description.setText(item.getSnippet().getResponsibility());
+            addToFavourite.setOnClickListener(view -> onAdapterClickListener.onClickFavourite(item, addToFavourite));
         }
+
+        @Override
+        public void onClick(View view) {
+            onAdapterClickListener.onClickAdapter(getAdapterPosition());
+        }
+    }
+
+    public interface OnAdapterClickListener {
+        void onClickAdapter(int position);
+        void onClickFavourite(ItemHunter itemHunter, ImageView imageView);
     }
 }

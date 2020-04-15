@@ -8,25 +8,25 @@ public class Employer {
 
     @SerializedName("id")
     @Expose
-    private String id;
+    private String ids;
     @SerializedName("name")
     @Expose
-    private String name;
+    private String _name;
 
-    public String getId() {
-        return id;
+    public String getIds() {
+        return ids;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIds(String ids) {
+        this.ids = ids;
     }
 
     public String getName() {
-        return name;
+        return _name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this._name = name;
     }
 
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.headhunter.client.fragment.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_detailHeadHunterFragment"
+            app:destination="@id/detailHeadHunterFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_favourite"
+            app:destination="@id/favouritesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailHeadHunterFragment"
+        android:name="com.headhunter.client.fragment.DetailHeadHunterFragment"
+        android:label="fragment_detail_head_hunter"
+        tools:layout="@layout/fragment_detail_head_hunter" >
+        <action
+            android:id="@+id/action_detailHeadHunterFragment_to_favouritesFragment"
+            app:destination="@id/favouritesFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="com.headhunter.client.fragment.FavouritesFragment"
+        android:label="FavouritesFragment" />
+</navigation>
