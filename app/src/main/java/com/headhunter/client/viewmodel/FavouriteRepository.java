@@ -15,6 +15,7 @@ class FavouriteRepository {
     private static FavouriteRepository INSTANCE;
     private HeadHunterDao headHunterDao;
     private LiveData<List<ItemHunter>> listLiveData;
+    private LiveData<Integer> checkDB;
 
     static FavouriteRepository getInstance(Context context) {
         if (INSTANCE == null) {
@@ -27,6 +28,11 @@ class FavouriteRepository {
     private FavouriteRepository(Context context) {
         headHunterDao = HeadHunterDataBase.getInstance(context).getHeadHunterDao();
         listLiveData = headHunterDao.getAllFavouriteVacancy();
+        checkDB = headHunterDao.getCheckDB();
+    }
+
+    public LiveData<Integer> getCheckDB() {
+        return checkDB;
     }
 
     LiveData<List<ItemHunter>> getListLiveData() {

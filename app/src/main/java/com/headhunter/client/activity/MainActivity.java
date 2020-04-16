@@ -30,13 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void navigation() {
         navigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        NavigationUI.setupWithNavController(navigationView, navController);
+                item -> {
+                    NavigationUI.setupWithNavController(navigationView, navController);
 
-                        return false;
-                    }
+                    return false;
                 });
     }
 

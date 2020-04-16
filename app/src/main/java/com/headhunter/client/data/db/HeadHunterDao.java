@@ -21,4 +21,7 @@ public interface HeadHunterDao {
 
     @Query("SELECT * FROM item_db")
     LiveData<List<ItemHunter>> getAllFavouriteVacancy();
+
+    @Query("SELECT COUNT(*) FROM item_db")
+    LiveData<Integer> getCheckDB();
 }

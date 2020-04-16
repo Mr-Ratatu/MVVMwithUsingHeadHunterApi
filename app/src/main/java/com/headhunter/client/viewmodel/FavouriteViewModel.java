@@ -14,12 +14,18 @@ public class FavouriteViewModel extends AndroidViewModel {
 
     private FavouriteRepository favouriteRepository;
     private LiveData<List<ItemHunter>> listLiveData;
+    private LiveData<Integer> checkDB;
 
     public FavouriteViewModel(@NonNull Application application) {
         super(application);
 
         favouriteRepository = FavouriteRepository.getInstance(application);
         listLiveData = favouriteRepository.getListLiveData();
+        checkDB = favouriteRepository.getCheckDB();
+    }
+
+    public LiveData<Integer> getCheckDB() {
+        return checkDB;
     }
 
     public LiveData<List<ItemHunter>> getListLiveData() {

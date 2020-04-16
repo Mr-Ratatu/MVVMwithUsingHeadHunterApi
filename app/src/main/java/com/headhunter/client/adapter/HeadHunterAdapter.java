@@ -10,13 +10,8 @@ import android.widget.TextView;
 import com.headhunter.client.R;
 import com.headhunter.client.data.model.ItemHunter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
-import androidx.recyclerview.widget.AsyncDifferConfig;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAdapter.HeadHunterViewHolder> {
@@ -37,9 +32,7 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
 
     @Override
     public void onBindViewHolder(@NonNull HeadHunterViewHolder holder, int position) {
-        ItemHunter item = getItem(position);
-
-        holder.bind(item);
+        holder.bind(getItem(position));
     }
 
     class HeadHunterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -60,7 +53,7 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
             itemView.setOnClickListener(this);
         }
 
-        public void bind(ItemHunter item) {
+        void bind(ItemHunter item) {
             titleVacancy.setText(item.getName());
             companyName.setText(item.getEmployer().getName());
             description.setText(item.getSnippet().getResponsibility());
