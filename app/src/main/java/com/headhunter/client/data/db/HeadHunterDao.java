@@ -14,7 +14,7 @@ import androidx.room.Query;
 @Dao
 public interface HeadHunterDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(List<ItemHunter> itemHunter);
+    void insert(ItemHunter itemHunter);
 
     @Delete
     void delete(ItemHunter itemHunter);
@@ -24,4 +24,5 @@ public interface HeadHunterDao {
 
     @Query("SELECT COUNT(*) FROM item_db")
     LiveData<Integer> getCheckDB();
+
 }

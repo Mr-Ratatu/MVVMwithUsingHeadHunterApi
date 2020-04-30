@@ -7,22 +7,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.headhunter.client.R;
+import com.headhunter.client.binding.FavouriteItemViewModel;
 import com.headhunter.client.data.model.ItemHunter;
+import com.headhunter.client.databinding.FavouriteItemBinding;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class FavouriteAdapter extends ListAdapter<ItemHunter, FavouriteAdapter.FavouriteViewHolder> {
 
-    private OnFavouriteClickListener onFavouriteClickListener;
-
-    public FavouriteAdapter(OnFavouriteClickListener onFavouriteClickListener) {
+    public FavouriteAdapter() {
         super(DIFF_CALLBACK);
-        this.onFavouriteClickListener = onFavouriteClickListener;
     }
 
     private static final DiffUtil.ItemCallback<ItemHunter> DIFF_CALLBACK = new DiffUtil.ItemCallback<ItemHunter>() {
@@ -42,8 +42,9 @@ public class FavouriteAdapter extends ListAdapter<ItemHunter, FavouriteAdapter.F
     @NonNull
     @Override
     public FavouriteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favourite_item, parent, false);
-        return new FavouriteViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        FavouriteItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.favourite_item, parent, false);
+        return new FavouriteViewHolder(binding);
     }
 
     @Override
@@ -51,39 +52,23 @@ public class FavouriteAdapter extends ListAdapter<ItemHunter, FavouriteAdapter.F
         holder.bind(getItem(position));
     }
 
-    class FavouriteViewHolder extends RecyclerView.ViewHolder {
+    static class FavouriteViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView titleVacancy;
-        private TextView companyName;
-        private TextView description;
-        private ImageView settings;
+        private FavouriteItemBinding favouriteItemBinding;
 
-        public FavouriteViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            titleVacancy = itemView.findViewById(R.id.title_vacancy_favourite);
-            companyName = itemView.findViewById(R.id.company_name_favourite);
-            description = itemView.findViewById(R.id.description_favourite);
-            settings = itemView.findViewById(R.id.settings_favourite);
-
+        public FavouriteViewHolder(FavouriteItemBinding favouriteItemBinding) {
+            super(favouriteItemBinding.getRoot());
+            this.favouriteItemBinding = favouriteItemBinding;
         }
 
         void bind(@NonNull ItemHunter itemHunter) {
-            titleVacancy.setText(itemHunter.getName());
-            companyName.setText(itemHunter.getEmployer().getName());
-
-            try {
-                description.setText(itemHunter.getSnippet().getResponsibility());
-            } catch (Exception e) {
-                e.printStackTrace();
-                description.setText("");
+            if (favouriteItemBinding.getViewModel() == null) {
+                favouriteItemBinding.setViewModel(
+                        new FavouriteItemViewModel(itemHunter, itemView.getContext()));
+            } else {
+                favouriteItemBinding.getViewModel().setItemHunter(itemHunter);
             }
-
-            settings.setOnClickListener(view -> onFavouriteClickListener.onClickSettingsFavourite(itemHunter, view));
         }
     }
 
-    public interface OnFavouriteClickListener {
-        void onClickSettingsFavourite(ItemHunter itemHunter, View view);
-    }
 }

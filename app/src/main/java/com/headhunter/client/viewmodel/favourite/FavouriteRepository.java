@@ -1,4 +1,4 @@
-package com.headhunter.client.viewmodel;
+package com.headhunter.client.viewmodel.favourite;
 
 import android.content.Context;
 
@@ -10,14 +10,14 @@ import java.util.List;
 
 import androidx.lifecycle.LiveData;
 
-class FavouriteRepository {
+public class FavouriteRepository {
 
     private static FavouriteRepository INSTANCE;
     private HeadHunterDao headHunterDao;
     private LiveData<List<ItemHunter>> listLiveData;
     private LiveData<Integer> checkDB;
 
-    static FavouriteRepository getInstance(Context context) {
+    public static FavouriteRepository getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new FavouriteRepository(context);
         }
@@ -39,13 +39,13 @@ class FavouriteRepository {
         return listLiveData;
     }
 
-    void insertHabit(final List<ItemHunter> itemHunters) {
+    public void insertHunter(final ItemHunter itemHunters) {
         HeadHunterDataBase.databaseWriteExecutor.execute(() -> {
             headHunterDao.insert(itemHunters);
         });
     }
 
-    void deleteHabit(ItemHunter itemHunter) {
+    public void deleteHunter(ItemHunter itemHunter) {
         HeadHunterDataBase.databaseWriteExecutor.execute(() -> {
             headHunterDao.delete(itemHunter);
         });

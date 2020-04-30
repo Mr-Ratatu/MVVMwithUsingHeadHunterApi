@@ -1,4 +1,4 @@
-package com.headhunter.client.data.source;
+package com.headhunter.client.data.paging;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -33,4 +33,5 @@ public class HeadHunterSourceFactory extends DataSource.Factory {
     public MutableLiveData<MyPositionalDataSource> getMutableLiveData() {
         return mutableLiveData;
     }
+
 }

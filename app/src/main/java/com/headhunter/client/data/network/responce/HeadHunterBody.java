@@ -1,9 +1,10 @@
 
-package com.headhunter.client.data.model;
+package com.headhunter.client.data.network.responce;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.headhunter.client.data.model.ItemHunter;
 
 public class HeadHunterBody {
 
@@ -18,7 +19,5 @@ public class HeadHunterBody {
     public void setItems(List<ItemHunter> items) {
         this.items = items;
     }
-
-
 
 }

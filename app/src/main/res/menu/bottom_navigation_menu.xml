@@ -4,13 +4,11 @@
 
     <item
         android:id="@+id/mainFragment"
-        app:showAsAction="always"
         android:icon="@drawable/ic_search"
         android:title="Поиск" />
 
     <item
         android:id="@+id/favouritesFragment"
-        app:showAsAction="always"
         android:icon="@drawable/ic_star_nav"
         android:title="Избранное" />
 </menu>

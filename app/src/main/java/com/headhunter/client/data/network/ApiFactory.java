@@ -3,6 +3,7 @@ package com.headhunter.client.data.network;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiFactory {
@@ -11,7 +12,7 @@ public class ApiFactory {
     private Retrofit retrofit;
     private static final String BASE_URL = "https://api.hh.ru/";
 
-    public ApiFactory() {
+    private ApiFactory() {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -21,6 +22,7 @@ public class ApiFactory {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client.build())
                 .build();
     }

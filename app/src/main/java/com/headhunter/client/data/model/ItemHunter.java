@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 @Entity(tableName = "item_db")
 public class ItemHunter {
@@ -34,6 +33,10 @@ public class ItemHunter {
     @Embedded
     @Expose
     private Snippet snippet;
+    @SerializedName("area")
+    @Embedded
+    @Expose
+    private Area area;
 
     public long get_id() {
         return _id;
@@ -83,10 +86,18 @@ public class ItemHunter {
         this.snippet = snippet;
     }
 
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
+
     public static final DiffUtil.ItemCallback<ItemHunter> CALLBACK = new DiffUtil.ItemCallback<ItemHunter>() {
         @Override
         public boolean areItemsTheSame(@NonNull ItemHunter oldItem, @NonNull ItemHunter newItem) {
-            return oldItem.id == newItem.id;
+            return oldItem.id.equals(newItem.id);
         }
 
         @Override

@@ -11,30 +11,18 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.headhunter.client.R;
-import com.headhunter.client.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-    private BottomNavigationView navigationView;
-    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        navigationView = findViewById(R.id.navigation);
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        navigation();
+        BottomNavigationView navigationView = findViewById(R.id.navigation);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    private void navigation() {
-        navigationView.setOnNavigationItemSelectedListener(
-                item -> {
-                    NavigationUI.setupWithNavController(navigationView, navController);
-
-                    return false;
-                });
-    }
 
 }

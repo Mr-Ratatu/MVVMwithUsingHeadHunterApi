@@ -1,12 +1,10 @@
-package com.headhunter.client.viewmodel;
+package com.headhunter.client.viewmodel.main;
 
 import android.app.Application;
 
-import com.headhunter.client.data.source.HeadHunterSourceFactory;
-import com.headhunter.client.data.source.MyPositionalDataSource;
+import com.headhunter.client.data.paging.HeadHunterSourceFactory;
 import com.headhunter.client.data.model.ItemHunter;
 
-import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -19,11 +17,7 @@ import androidx.paging.PagedList;
 
 public class HeadHunterViewModel extends AndroidViewModel {
 
-    private HeadHunterRepository hunterRepository;
-    private MutableLiveData<List<ItemHunter>> mutableLiveData;
-
     private HeadHunterSourceFactory headHunterSourceFactory;
-    private MutableLiveData<MyPositionalDataSource> mutableLiveDataSource;
     private Executor executor;
     private LiveData<PagedList<ItemHunter>> pagedListLiveData;
 
@@ -31,7 +25,6 @@ public class HeadHunterViewModel extends AndroidViewModel {
         super(application);
 
         headHunterSourceFactory = new HeadHunterSourceFactory(area, text, page);
-        mutableLiveDataSource = headHunterSourceFactory.getMutableLiveData();
 
         PagedList.Config config = (new PagedList.Config.Builder())
                 .setEnablePlaceholders(true)
@@ -46,15 +39,10 @@ public class HeadHunterViewModel extends AndroidViewModel {
                 .setFetchExecutor(executor)
                 .build();
 
-        hunterRepository = HeadHunterRepository.getInstance(application);
-        mutableLiveData = hunterRepository.getItemHunter(area, text, page);
-    }
-
-    public MutableLiveData<List<ItemHunter>> getMutableLiveData() {
-        return mutableLiveData;
     }
 
     public LiveData<PagedList<ItemHunter>> getPagedListLiveData() {
         return pagedListLiveData;
     }
+
 }

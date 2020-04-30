@@ -1,4 +1,4 @@
-package com.headhunter.client.viewmodel;
+package com.headhunter.client.viewmodel.favourite;
 
 import android.app.Application;
 

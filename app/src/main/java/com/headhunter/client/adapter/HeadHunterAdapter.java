@@ -8,26 +8,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.headhunter.client.R;
+import com.headhunter.client.binding.MainItemViewModel;
 import com.headhunter.client.data.model.ItemHunter;
+import com.headhunter.client.databinding.HeadHunterItemBinding;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAdapter.HeadHunterViewHolder> {
 
-    private OnAdapterClickListener onAdapterClickListener;
-
-    public HeadHunterAdapter(OnAdapterClickListener onAdapterClickListener) {
+    public HeadHunterAdapter() {
         super(ItemHunter.CALLBACK);
-        this.onAdapterClickListener = onAdapterClickListener;
     }
 
     @NonNull
     @Override
     public HeadHunterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.head_hunter_item, parent, false);
-        return new HeadHunterViewHolder(view);
+        LayoutInflater inflate = LayoutInflater.from(parent.getContext());
+        HeadHunterItemBinding binding = DataBindingUtil.inflate(inflate, R.layout.head_hunter_item, parent, false);
+        return new HeadHunterViewHolder(binding);
     }
 
     @Override
@@ -35,39 +36,17 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
         holder.bind(getItem(position));
     }
 
-    class HeadHunterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class HeadHunterViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView titleVacancy;
-        private TextView companyName;
-        private TextView description;
-        private ImageView addToFavourite;
+        private HeadHunterItemBinding binding;
 
-        public HeadHunterViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            titleVacancy = itemView.findViewById(R.id.title_vacancy);
-            companyName = itemView.findViewById(R.id.company_name);
-            description = itemView.findViewById(R.id.description);
-            addToFavourite = itemView.findViewById(R.id.add_to_favourite);
-
-            itemView.setOnClickListener(this);
+        public HeadHunterViewHolder(HeadHunterItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bind(ItemHunter item) {
-            titleVacancy.setText(item.getName());
-            companyName.setText(item.getEmployer().getName());
-            description.setText(item.getSnippet().getResponsibility());
-            addToFavourite.setOnClickListener(view -> onAdapterClickListener.onClickFavourite(item, addToFavourite));
+            binding.setMainViewModel(new MainItemViewModel(itemView.getContext(), item));
         }
-
-        @Override
-        public void onClick(View view) {
-            onAdapterClickListener.onClickAdapter(getAdapterPosition());
-        }
-    }
-
-    public interface OnAdapterClickListener {
-        void onClickAdapter(int position);
-        void onClickFavourite(ItemHunter itemHunter, ImageView imageView);
     }
 }

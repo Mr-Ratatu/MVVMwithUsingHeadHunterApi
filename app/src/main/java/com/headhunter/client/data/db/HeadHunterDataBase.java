@@ -11,12 +11,13 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {ItemHunter.class}, version = 1, exportSchema = false)
+@Database(entities = {ItemHunter.class}, version = 2, exportSchema = false)
 public abstract class HeadHunterDataBase extends RoomDatabase {
 
-    private static final String DB_NAME = "head_hunter";
-    private static HeadHunterDataBase instance;
     private static final int NUMBER_OF_THREADS = 4;
+    private static final String DB_NAME = "head_hunter";
+
+    private static HeadHunterDataBase instance;
     public static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 

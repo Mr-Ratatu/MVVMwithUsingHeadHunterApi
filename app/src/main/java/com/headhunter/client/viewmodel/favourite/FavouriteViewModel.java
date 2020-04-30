@@ -1,12 +1,16 @@
-package com.headhunter.client.viewmodel;
+package com.headhunter.client.viewmodel.favourite;
 
 import android.app.Application;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.headhunter.client.data.model.ItemHunter;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
@@ -14,7 +18,7 @@ public class FavouriteViewModel extends AndroidViewModel {
 
     private FavouriteRepository favouriteRepository;
     private LiveData<List<ItemHunter>> listLiveData;
-    private LiveData<Integer> checkDB;
+    private static LiveData<Integer> checkDB;
 
     public FavouriteViewModel(@NonNull Application application) {
         super(application);
@@ -32,11 +36,13 @@ public class FavouriteViewModel extends AndroidViewModel {
         return listLiveData;
     }
 
-    public void insert(List<ItemHunter> itemHunterList) {
-        favouriteRepository.insertHabit(itemHunterList);
-    }
+    /*@BindingAdapter("app:visibleText")
+    public static void visibleText(TextView textView, Integer value) {
+        if (value > 0) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+    }*/
 
-    public void delete(ItemHunter deleteItemHunter) {
-        favouriteRepository.deleteHabit(deleteItemHunter);
-    }
 }
