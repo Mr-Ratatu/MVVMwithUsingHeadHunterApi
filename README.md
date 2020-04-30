@@ -1,4 +1,4 @@
-# My MVVM project with using HeadHunter Api
+
 
 Stack:
 Room,
