@@ -10,3 +10,6 @@ Retrofit,
 RxJava, 
 Navigation Component, 
 Paging Library.
+
+
+*The app is not finished
