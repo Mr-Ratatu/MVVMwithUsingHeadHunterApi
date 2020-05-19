@@ -1,17 +1,12 @@
-package com.headhunter.client.adapter;
+package com.headhunter.client.ui.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.headhunter.client.R;
 import com.headhunter.client.binding.FavouriteItemViewModel;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.databinding.FavouriteItemBinding;
-
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -42,8 +37,8 @@ public class FavouriteAdapter extends ListAdapter<ItemHunter, FavouriteAdapter.F
     @NonNull
     @Override
     public FavouriteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        FavouriteItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.favourite_item, parent, false);
+        FavouriteItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.favourite_item, parent, false);
         return new FavouriteViewHolder(binding);
     }
 

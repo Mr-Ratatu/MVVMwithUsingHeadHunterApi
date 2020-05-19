@@ -40,9 +40,7 @@ public class FavouriteRepository {
     }
 
     public void insertHunter(final ItemHunter itemHunters) {
-        HeadHunterDataBase.databaseWriteExecutor.execute(() -> {
-            headHunterDao.insert(itemHunters);
-        });
+        HeadHunterDataBase.databaseWriteExecutor.execute(() -> headHunterDao.insert(itemHunters));
     }
 
     public void deleteHunter(ItemHunter itemHunter) {

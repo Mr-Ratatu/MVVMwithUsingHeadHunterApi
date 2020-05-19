@@ -1,11 +1,7 @@
-package com.headhunter.client.adapter;
+package com.headhunter.client.ui.adapter;
 
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.headhunter.client.R;
 import com.headhunter.client.binding.MainItemViewModel;
@@ -26,8 +22,8 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
     @NonNull
     @Override
     public HeadHunterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflate = LayoutInflater.from(parent.getContext());
-        HeadHunterItemBinding binding = DataBindingUtil.inflate(inflate, R.layout.head_hunter_item, parent, false);
+        HeadHunterItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.head_hunter_item, parent, false);
         return new HeadHunterViewHolder(binding);
     }
 
@@ -47,6 +43,7 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
 
         void bind(ItemHunter item) {
             binding.setMainViewModel(new MainItemViewModel(itemView.getContext(), item));
+            binding.executePendingBindings();
         }
     }
 }

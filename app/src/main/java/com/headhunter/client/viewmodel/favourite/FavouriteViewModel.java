@@ -11,8 +11,10 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BindingAdapter;
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 public class FavouriteViewModel extends AndroidViewModel {
 
@@ -36,9 +38,10 @@ public class FavouriteViewModel extends AndroidViewModel {
         return listLiveData;
     }
 
+
     /*@BindingAdapter("app:visibleText")
-    public static void visibleText(TextView textView, Integer value) {
-        if (value > 0) {
+    public void visibleText(TextView textView, LiveData<Integer> value) {
+        if (value.getValue() > 0) {
             textView.setVisibility(View.VISIBLE);
         } else {
             textView.setVisibility(View.GONE);

@@ -1,5 +1,7 @@
 package com.headhunter.client.data.network;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,14 +18,17 @@ public class ApiFactory {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient.Builder client = new OkHttpClient.Builder();
-        client.addInterceptor(httpLoggingInterceptor);
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(20, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .addInterceptor(httpLoggingInterceptor)
+                .build();
 
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(client.build())
+                .client(client)
                 .build();
     }
 

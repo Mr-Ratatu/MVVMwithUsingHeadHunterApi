@@ -1,16 +1,19 @@
 package com.headhunter.client.binding;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.headhunter.client.R;
+import com.headhunter.client.ui.adapter.HeadHunterAdapter;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.viewmodel.favourite.FavouriteRepository;
 
 import androidx.databinding.BaseObservable;
+import androidx.databinding.BindingAdapter;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainItemViewModel extends BaseObservable {
 
@@ -50,5 +53,11 @@ public class MainItemViewModel extends BaseObservable {
 
     public void openTheDetailFragmentClick(View view) {
         Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_detailHeadHunterFragment);
+    }
+
+    @BindingAdapter("app:setAdapter")
+    public static void bindRecyclerViewAdapter(RecyclerView recyclerView, RecyclerView.Adapter<?> adapter) {
+        recyclerView.setAdapter(new HeadHunterAdapter());
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
     }
 }

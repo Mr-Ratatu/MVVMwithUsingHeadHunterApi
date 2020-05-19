@@ -1,18 +1,15 @@
-package com.headhunter.client.fragment;
+package com.headhunter.client.ui.fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.headhunter.client.R;
-import com.headhunter.client.viewmodel.main.HeadHunterViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
