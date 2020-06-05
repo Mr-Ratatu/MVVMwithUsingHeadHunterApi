@@ -106,4 +106,8 @@ public class ItemHunter {
         }
 
     };
+
+    public boolean getImgVisible() {
+        return employer.getLogoUrls().get240() != null && !employer.getLogoUrls().get240().isEmpty();
+    }
 }

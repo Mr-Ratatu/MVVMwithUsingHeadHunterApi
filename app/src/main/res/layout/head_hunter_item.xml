@@ -5,7 +5,7 @@
 
         <variable
             name="mainViewModel"
-            type="com.headhunter.client.binding.MainItemViewModel" />
+            type="com.headhunter.client.viewmodel.item.MainItemViewModel" />
 
     </data>
 
@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/ripple_effect"
-            android:onClick="@{(view) -> mainViewModel.openTheDetailFragmentClick(view)}"
             android:focusable="true"
+            android:onClick="@{(view) -> mainViewModel.openTheDetailFragmentClick(view)}"
             android:orientation="vertical">
 
             <LinearLayout
@@ -38,6 +38,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        app:cardElevation="4dp">
+
+                        <ImageView
+                            logoCompany="@{mainViewModel.imgUrl}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:visibility="@{mainViewModel.logoVisibility}" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/title_vacancy"
@@ -53,8 +66,8 @@
                         android:id="@+id/add_to_favourite"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/ic_star"
-                        android:onClick="@{() -> mainViewModel.addToFavouritesClick()}"/>
+                        android:onClick="@{() -> mainViewModel.addToFavouritesClick()}"
+                        android:src="@drawable/ic_star" />
                 </LinearLayout>
 
                 <TextView

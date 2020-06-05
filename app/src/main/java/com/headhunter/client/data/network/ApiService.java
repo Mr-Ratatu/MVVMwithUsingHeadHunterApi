@@ -12,7 +12,7 @@ public interface ApiService {
     @GET("vacancies")
     Observable<HeadHunterBody> getVacancies(@Query("area") int area,
                                             @Query("text") String text,
-                                            @Query("page") int page);
+                                            @Query("page") long page);
 
     @GET("vacancies/{vacancies_id}")
     Call<HeadHunterBody> getIdVacancies(@Path("vacancies_id") long id);

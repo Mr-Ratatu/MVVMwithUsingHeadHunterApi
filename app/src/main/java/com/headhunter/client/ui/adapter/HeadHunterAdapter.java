@@ -1,12 +1,17 @@
 package com.headhunter.client.ui.adapter;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.headhunter.client.R;
-import com.headhunter.client.binding.MainItemViewModel;
+import com.headhunter.client.utils.NetworkState;
+import com.headhunter.client.viewmodel.item.MainItemViewModel;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.databinding.HeadHunterItemBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -14,6 +19,10 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAdapter.HeadHunterViewHolder> {
+
+    public static final int MOVIE_ITEM_VIEW_TYPE = 1;
+    public static final int LOAD_ITEM_VIEW_TYPE = 0;
+    private NetworkState networkState;
 
     public HeadHunterAdapter() {
         super(ItemHunter.CALLBACK);
@@ -32,7 +41,16 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
         holder.bind(getItem(position));
     }
 
-    class HeadHunterViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public int getItemViewType(int position) {
+        return (isLoadingData() && position == getItemCount() - 1) ? LOAD_ITEM_VIEW_TYPE : MOVIE_ITEM_VIEW_TYPE;
+    }
+
+    public boolean isLoadingData() {
+        return (networkState != null && networkState != NetworkState.LOADED);
+    }
+
+    static class HeadHunterViewHolder extends RecyclerView.ViewHolder {
 
         private HeadHunterItemBinding binding;
 
@@ -42,8 +60,15 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
         }
 
         void bind(ItemHunter item) {
-            binding.setMainViewModel(new MainItemViewModel(itemView.getContext(), item));
+            binding.setMainViewModel(new MainItemViewModel(binding, itemView.getContext(), item));
             binding.executePendingBindings();
+        }
+    }
+
+    static class ProgressViewHolder extends RecyclerView.ViewHolder {
+
+        public ProgressViewHolder(@NonNull View itemView) {
+            super(itemView);
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.headhunter.client.data.paging;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.MutableLiveData;
 import androidx.paging.DataSource;
 
@@ -11,12 +12,10 @@ public class HeadHunterSourceFactory extends DataSource.Factory {
 
     private int area;
     private String text;
-    private int page;
 
-    public HeadHunterSourceFactory(int area, String text, int page) {
+    public HeadHunterSourceFactory(int area, String text) {
         this.area = area;
         this.text = text;
-        this.page = page;
 
         mutableLiveData = new MutableLiveData<>();
     }
@@ -24,7 +23,7 @@ public class HeadHunterSourceFactory extends DataSource.Factory {
     @NonNull
     @Override
     public DataSource create() {
-        myPositionalDataSource = new MyPositionalDataSource(area, text, page);
+        myPositionalDataSource = new MyPositionalDataSource(area, text);
         mutableLiveData.postValue(myPositionalDataSource);
 
         return myPositionalDataSource;

@@ -23,16 +23,11 @@ public class HeadHunterViewModel extends AndroidViewModel {
     private HeadHunterSourceFactory headHunterSourceFactory;
     private Executor executor;
     private LiveData<PagedList<ItemHunter>> pagedListLiveData;
-    private RecyclerView.Adapter headHunterAdapter;
-    public ObservableInt loading;
 
-    public HeadHunterViewModel(@NonNull Application application, int area, String text, int page) {
+    public HeadHunterViewModel(@NonNull Application application, int area, String text) {
         super(application);
 
-        loading = new ObservableInt(View.VISIBLE);
-
-        headHunterAdapter = new HeadHunterAdapter();
-        headHunterSourceFactory = new HeadHunterSourceFactory(area, text, page);
+        headHunterSourceFactory = new HeadHunterSourceFactory(area, text);
 
         PagedList.Config config = (new PagedList.Config.Builder())
                 .setEnablePlaceholders(true)

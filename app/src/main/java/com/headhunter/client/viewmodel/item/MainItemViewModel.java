@@ -1,10 +1,14 @@
-package com.headhunter.client.binding;
+package com.headhunter.client.viewmodel.item;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.headhunter.client.R;
+import com.headhunter.client.databinding.HeadHunterItemBinding;
 import com.headhunter.client.ui.adapter.HeadHunterAdapter;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.viewmodel.favourite.FavouriteRepository;
@@ -12,16 +16,17 @@ import com.headhunter.client.viewmodel.favourite.FavouriteRepository;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.BindingAdapter;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class MainItemViewModel extends BaseObservable {
 
     private FavouriteRepository favouriteRepository;
+    private HeadHunterItemBinding binding;
     private ItemHunter itemHunter;
     private Context context;
+    private HeadHunterAdapter headHunterAdapter;
 
-    public MainItemViewModel(Context context, ItemHunter itemHunter) {
+    public MainItemViewModel(HeadHunterItemBinding binding, Context context, ItemHunter itemHunter) {
+        this.binding = binding;
         this.itemHunter = itemHunter;
         this.context = context;
         favouriteRepository = FavouriteRepository.getInstance(context);
@@ -33,6 +38,14 @@ public class MainItemViewModel extends BaseObservable {
 
     public String getEmployerName() {
         return itemHunter.getEmployer().getName();
+    }
+
+    public String getImgUrl() {
+        return itemHunter.getEmployer().getLogoUrls().get240();
+    }
+
+    public int getLogoVisibility() {
+        return itemHunter.getImgVisible() ? View.VISIBLE : View.GONE;
     }
 
     public String getSnippetResponsibility() {
@@ -47,17 +60,14 @@ public class MainItemViewModel extends BaseObservable {
         if (itemHunter.getSnippet().getResponsibility() == null) {
             itemHunter.getSnippet().setResponsibility("");
         }
+
         favouriteRepository.insertHunter(itemHunter);
         Toast.makeText(context, "Вакансия добавлена в избранное", Toast.LENGTH_SHORT).show();
+        binding.addToFavourite.setImageResource(R.drawable.ic_star_nav);
     }
 
     public void openTheDetailFragmentClick(View view) {
         Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_detailHeadHunterFragment);
     }
 
-    @BindingAdapter("app:setAdapter")
-    public static void bindRecyclerViewAdapter(RecyclerView recyclerView, RecyclerView.Adapter<?> adapter) {
-        recyclerView.setAdapter(new HeadHunterAdapter());
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-    }
 }

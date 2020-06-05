@@ -1,4 +1,4 @@
-package com.headhunter.client.binding;
+package com.headhunter.client.viewmodel.item;
 
 import android.content.Context;
 import android.view.View;

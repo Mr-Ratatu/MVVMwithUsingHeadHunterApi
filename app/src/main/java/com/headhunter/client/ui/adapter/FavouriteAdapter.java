@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.headhunter.client.R;
-import com.headhunter.client.binding.FavouriteItemViewModel;
+import com.headhunter.client.viewmodel.item.FavouriteItemViewModel;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.databinding.FavouriteItemBinding;
 

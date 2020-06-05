@@ -1,7 +1,12 @@
 package com.headhunter.client.data.model;
 
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import androidx.databinding.BindingAdapter;
 
 public class LogoUrls {
 
@@ -37,6 +42,11 @@ public class LogoUrls {
 
     public void set90(String _90) {
         this._90 = _90;
+    }
+
+    @BindingAdapter("logoCompany")
+    public static void logoCompany(ImageView imageView, String url) {
+        Glide.with(imageView.getContext()).load(url).into(imageView);
     }
 
 }

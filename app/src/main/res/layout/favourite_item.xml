@@ -5,7 +5,7 @@
 
         <variable
             name="viewModel"
-            type="com.headhunter.client.binding.FavouriteItemViewModel" />
+            type="com.headhunter.client.viewmodel.item.FavouriteItemViewModel" />
 
     </data>
 

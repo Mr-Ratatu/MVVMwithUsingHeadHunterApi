@@ -11,7 +11,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-@Database(entities = {ItemHunter.class}, version = 2, exportSchema = false)
+@Database(entities = {ItemHunter.class}, version = 3, exportSchema = false)
 public abstract class HeadHunterDataBase extends RoomDatabase {
 
     private static final int NUMBER_OF_THREADS = 4;

@@ -35,7 +35,7 @@ public class MainFragment extends Fragment {
 
         //Отредактировать
         headHunterViewModel = new ViewModelProvider(this, new HunterViewModelFactory(getActivity().getApplication(),
-                1, "android", 1)).get(HeadHunterViewModel.class);
+                1, "android")).get(HeadHunterViewModel.class);
 
         binding.setViewModel(headHunterViewModel);
 
@@ -48,7 +48,6 @@ public class MainFragment extends Fragment {
 
         headHunterViewModel.getPagedListLiveData().observe(getViewLifecycleOwner(), itemHunters -> {
             headHunterAdapter.submitList(itemHunters);
-            headHunterViewModel.loading.set(View.GONE);
         });
 
     }
