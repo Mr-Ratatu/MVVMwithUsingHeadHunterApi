@@ -1,14 +1,17 @@
 package com.headhunter.client.viewmodel.item;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
 import com.headhunter.client.R;
 import com.headhunter.client.data.model.ItemHunter;
+import com.headhunter.client.utils.Constant;
 import com.headhunter.client.viewmodel.favourite.FavouriteRepository;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.databinding.BaseObservable;
+import androidx.navigation.Navigation;
 
 public class FavouriteItemViewModel extends BaseObservable {
 
@@ -55,6 +58,13 @@ public class FavouriteItemViewModel extends BaseObservable {
         });
 
         popup.show();
+    }
+
+    public void openDetailFragmentClick(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.FAVOURITE_ITEM, itemHunter.getId());
+
+        Navigation.findNavController(view).navigate(R.id.action_favouritesFragment_to_detailHeadHunterFragment, bundle);
     }
 
     public void setItemHunter(ItemHunter itemHunter) {

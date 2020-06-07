@@ -1,5 +1,5 @@
 
-package com.headhunter.client.data.model;
+package com.headhunter.client.data.model.detail;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

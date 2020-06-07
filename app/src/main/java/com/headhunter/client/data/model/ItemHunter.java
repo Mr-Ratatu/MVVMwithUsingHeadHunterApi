@@ -1,8 +1,12 @@
 
 package com.headhunter.client.data.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -11,7 +15,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "item_db")
-public class ItemHunter {
+public class ItemHunter implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private long _id;
@@ -21,10 +25,6 @@ public class ItemHunter {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("salary")
-    @Embedded
-    @Expose
-    private Salary salary;
     @SerializedName("employer")
     @Embedded
     @Expose
@@ -60,14 +60,6 @@ public class ItemHunter {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Salary getSalary() {
-        return salary;
-    }
-
-    public void setSalary(Salary salary) {
-        this.salary = salary;
     }
 
     public Employer getEmployer() {
@@ -107,7 +99,4 @@ public class ItemHunter {
 
     };
 
-    public boolean getImgVisible() {
-        return employer.getLogoUrls().get240() != null && !employer.getLogoUrls().get240().isEmpty();
-    }
 }

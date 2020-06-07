@@ -1,6 +1,8 @@
 
 package com.headhunter.client.data.model;
 
+import android.util.Log;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -14,10 +16,6 @@ public class Employer {
     @SerializedName("name")
     @Expose
     private String _name;
-    @SerializedName("logo_urls")
-    @Embedded
-    @Expose
-    private LogoUrls logoUrls;
 
     public String getIds() {
         return ids;
@@ -35,11 +33,4 @@ public class Employer {
         this._name = name;
     }
 
-    public LogoUrls getLogoUrls() {
-        return logoUrls;
-    }
-
-    public void setLogoUrls(LogoUrls logoUrls) {
-        this.logoUrls = logoUrls;
-    }
 }

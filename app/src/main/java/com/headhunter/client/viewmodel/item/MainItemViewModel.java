@@ -1,6 +1,7 @@
 package com.headhunter.client.viewmodel.item;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import com.headhunter.client.R;
 import com.headhunter.client.databinding.HeadHunterItemBinding;
 import com.headhunter.client.ui.adapter.HeadHunterAdapter;
 import com.headhunter.client.data.model.ItemHunter;
+import com.headhunter.client.utils.Constant;
 import com.headhunter.client.viewmodel.favourite.FavouriteRepository;
 
 import androidx.databinding.BaseObservable;
@@ -23,7 +25,6 @@ public class MainItemViewModel extends BaseObservable {
     private HeadHunterItemBinding binding;
     private ItemHunter itemHunter;
     private Context context;
-    private HeadHunterAdapter headHunterAdapter;
 
     public MainItemViewModel(HeadHunterItemBinding binding, Context context, ItemHunter itemHunter) {
         this.binding = binding;
@@ -38,14 +39,6 @@ public class MainItemViewModel extends BaseObservable {
 
     public String getEmployerName() {
         return itemHunter.getEmployer().getName();
-    }
-
-    public String getImgUrl() {
-        return itemHunter.getEmployer().getLogoUrls().get240();
-    }
-
-    public int getLogoVisibility() {
-        return itemHunter.getImgVisible() ? View.VISIBLE : View.GONE;
     }
 
     public String getSnippetResponsibility() {
@@ -67,7 +60,10 @@ public class MainItemViewModel extends BaseObservable {
     }
 
     public void openTheDetailFragmentClick(View view) {
-        Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_detailHeadHunterFragment);
+        Bundle bundle = new Bundle();
+        bundle.putString(Constant.ITEM, itemHunter.getId());
+
+        Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_detailHeadHunterFragment, bundle);
     }
 
 }

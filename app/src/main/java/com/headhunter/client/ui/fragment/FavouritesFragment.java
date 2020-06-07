@@ -51,8 +51,10 @@ public class FavouritesFragment extends Fragment {
     private void checkOnEmptyDataBase(Integer value) {
         if (value == 0) {
             binding.infoText.setVisibility(View.VISIBLE);
+            binding.myListText.setVisibility(View.GONE);
         } else {
             binding.infoText.setVisibility(View.GONE);
+            binding.myListText.setVisibility(View.VISIBLE);
         }
     }
 

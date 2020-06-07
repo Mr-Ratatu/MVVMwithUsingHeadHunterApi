@@ -1,5 +1,7 @@
 package com.headhunter.client.data.network;
 
+import com.headhunter.client.data.model.ItemHunter;
+import com.headhunter.client.data.model.detail.DetailModelBody;
 import com.headhunter.client.data.network.responce.HeadHunterBody;
 
 import io.reactivex.Observable;
@@ -15,5 +17,5 @@ public interface ApiService {
                                             @Query("page") long page);
 
     @GET("vacancies/{vacancies_id}")
-    Call<HeadHunterBody> getIdVacancies(@Path("vacancies_id") long id);
+    Observable<DetailModelBody> getIdVacancies(@Path("vacancies_id") String id);
 }

@@ -9,22 +9,21 @@ public class HeadHunterSourceFactory extends DataSource.Factory {
 
     private MyPositionalDataSource myPositionalDataSource;
     private MutableLiveData<MyPositionalDataSource> mutableLiveData;
-
-    private int area;
-    private String text;
+    private ObservableInt error;
+    private ObservableInt loadingContent;
 
     public HeadHunterSourceFactory(int area, String text) {
-        this.area = area;
-        this.text = text;
-
+        myPositionalDataSource = new MyPositionalDataSource(area, text);
         mutableLiveData = new MutableLiveData<>();
+        error = myPositionalDataSource.getError();
+        loadingContent = myPositionalDataSource.getLoadingContent();
     }
 
     @NonNull
     @Override
     public DataSource create() {
-        myPositionalDataSource = new MyPositionalDataSource(area, text);
         mutableLiveData.postValue(myPositionalDataSource);
+
 
         return myPositionalDataSource;
     }
@@ -33,4 +32,11 @@ public class HeadHunterSourceFactory extends DataSource.Factory {
         return mutableLiveData;
     }
 
+    public ObservableInt getError() {
+        return error;
+    }
+
+    public ObservableInt getLoadingContent() {
+        return loadingContent;
+    }
 }

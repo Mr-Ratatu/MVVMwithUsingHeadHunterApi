@@ -3,4 +3,5 @@
 
     <string name="description_vacancy">Разработкой новых приложений под Android. Сопровождением и развитием существующих приложений. Опыт разработки Android – приложений. Уверенное владение одним из языков программирования под Android (Java, Kotlin). Знание Android API, понимание архитектуры Android.</string>
     <string name="search_work">Поиск работы</string>
+    <string name="my_list">Мой список:</string>
 </resources>
