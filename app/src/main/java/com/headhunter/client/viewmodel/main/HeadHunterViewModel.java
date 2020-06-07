@@ -7,6 +7,7 @@ import android.view.View;
 import com.headhunter.client.ui.adapter.HeadHunterAdapter;
 import com.headhunter.client.data.paging.HeadHunterSourceFactory;
 import com.headhunter.client.data.model.ItemHunter;
+import com.headhunter.client.ui.fragment.MainFragment;
 import com.headhunter.client.utils.Constant;
 
 import java.util.concurrent.Executor;
@@ -24,12 +25,13 @@ public class HeadHunterViewModel extends AndroidViewModel {
 
     private HeadHunterSourceFactory headHunterSourceFactory;
     private LiveData<PagedList<ItemHunter>> pagedListLiveData;
+    private MainFragment mainFragment;
     private ObservableInt error;
     private ObservableInt loadingContent;
 
-    public HeadHunterViewModel(@NonNull Application application, int area, String text) {
+    public HeadHunterViewModel(@NonNull Application application, int area, String text, MainFragment mainFragment) {
         super(application);
-
+        this.mainFragment = mainFragment;
         headHunterSourceFactory = new HeadHunterSourceFactory(area, text);
 
         PagedList.Config config = (new PagedList.Config.Builder())
@@ -63,5 +65,9 @@ public class HeadHunterViewModel extends AndroidViewModel {
 
     public ObservableInt getLoadingContent() {
         return loadingContent;
+    }
+
+    public void onDialogShowListener() {
+        mainFragment.showBottomDialog();
     }
 }

@@ -111,6 +111,12 @@ public class DetailModelBody {
     @SerializedName("alternate_url")
     @Expose
     private String alternateUrl;
+    @SerializedName("experience")
+    @Expose
+    private Experience experience;
+    @SerializedName("key_skills")
+    @Expose
+    private List<KeySkill> keySkills = null;
 
     public String getId() {
         return id;
@@ -368,11 +374,20 @@ public class DetailModelBody {
         this.alternateUrl = alternateUrl;
     }
 
-    @BindingAdapter("cardVisible")
-    public static void cardVisible(CardView cardView, LogoUrls url) {
-        if (url == null) {
-            cardView.setVisibility(View.GONE);
-        }
+    public Experience getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Experience experience) {
+        this.experience = experience;
+    }
+
+    public List<KeySkill> getKeySkills() {
+        return keySkills;
+    }
+
+    public void setKeySkills(List<KeySkill> keySkills) {
+        this.keySkills = keySkills;
     }
 
     @BindingAdapter("companyLogo")
@@ -380,6 +395,30 @@ public class DetailModelBody {
         Glide.with(imageView.getContext())
                 .load(url)
                 .into(imageView);
+    }
+
+    public int visibleTextSalary() {
+        if (salary == null) {
+            return View.GONE;
+        } else {
+            return View.VISIBLE;
+        }
+    }
+
+    public int keySkillsVisible() {
+        if (keySkills.isEmpty()) {
+            return View.GONE;
+        } else {
+            return View.VISIBLE;
+        }
+    }
+
+    public int cardViewVisible() {
+        if (employer.getLogoUrls() == null) {
+            return View.GONE;
+        } else {
+            return View.VISIBLE;
+        }
     }
 
 }

@@ -7,7 +7,6 @@ import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.data.network.ApiFactory;
 import com.headhunter.client.data.network.ApiService;
 import com.headhunter.client.utils.Constant;
-import com.headhunter.client.utils.NetworkState;
 
 import java.util.List;
 
@@ -25,7 +24,6 @@ public class MyPositionalDataSource extends PageKeyedDataSource<Long, ItemHunter
 
     private ApiService apiService;
     private CompositeDisposable compositeDisposable;
-    private MutableLiveData<NetworkState> loading;
     private ObservableInt error;
     private ObservableInt loadingContent;
 
@@ -38,14 +36,12 @@ public class MyPositionalDataSource extends PageKeyedDataSource<Long, ItemHunter
         apiService = ApiFactory.getInstance().getApiService();
         compositeDisposable = new CompositeDisposable();
 
-        loading = new MutableLiveData<>();
         error = new ObservableInt();
         loadingContent = new ObservableInt();
     }
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Long> params, @NonNull final LoadInitialCallback<Long, ItemHunter> callback) {
-        loading.postValue(NetworkState.LOADING);
         loadingContent.set(View.VISIBLE);
         error.set(View.GONE);
 
@@ -53,7 +49,6 @@ public class MyPositionalDataSource extends PageKeyedDataSource<Long, ItemHunter
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(headHunterBody -> {
-                    loading.postValue(NetworkState.LOADED);
                     List<ItemHunter> list = headHunterBody.getItems();
                     callback.onResult(list, null, (long) 2);
                     loadingContent.set(View.GONE);
@@ -74,13 +69,11 @@ public class MyPositionalDataSource extends PageKeyedDataSource<Long, ItemHunter
 
     @Override
     public void loadAfter(@NonNull final LoadParams<Long> params, @NonNull final LoadCallback<Long, ItemHunter> callback) {
-        loading.postValue(NetworkState.LOADING);
 
         Disposable disposable = apiService.getVacancies(area, text, params.key)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(headHunterBody -> {
-                    loading.postValue(NetworkState.LOADED);
                     List<ItemHunter> list = headHunterBody.getItems();
                     callback.onResult(list, params.key + 1);
                 }, Throwable::printStackTrace);

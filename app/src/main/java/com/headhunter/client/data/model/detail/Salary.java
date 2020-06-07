@@ -51,4 +51,14 @@ public class Salary {
         this.gross = gross;
     }
 
+    public String getExpectedSalary() {
+        if (getTo() == 0) {
+            return "от " + getFrom() + " ₽ на руки";
+        } else if (getFrom() == 0) {
+            return "до " + getTo() + " ₽ на руки";
+        } else {
+            return getFrom() + " - " + getTo() + " ₽ на руки";
+        }
+    }
+
 }

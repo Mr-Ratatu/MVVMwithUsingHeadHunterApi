@@ -7,6 +7,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +18,16 @@ import android.view.ViewGroup;
 import com.headhunter.client.R;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.data.model.detail.DetailModelBody;
+import com.headhunter.client.data.model.detail.KeySkill;
 import com.headhunter.client.data.network.responce.HeadHunterBody;
 import com.headhunter.client.databinding.FragmentDetailHeadHunterBinding;
+import com.headhunter.client.ui.adapter.KeySkillsAdapter;
 import com.headhunter.client.utils.Constant;
 import com.headhunter.client.viewmodel.detail.DetailViewModel;
 import com.headhunter.client.viewmodel.detail.DetailViewModelFactory;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +36,8 @@ public class DetailHeadHunterFragment extends Fragment {
 
     private DetailViewModel detailViewModel;
     private FragmentDetailHeadHunterBinding binding;
+    private KeySkillsAdapter keySkillsAdapter;
+    private List<KeySkill> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +45,7 @@ public class DetailHeadHunterFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,
                 R.layout.fragment_detail_head_hunter, container, false);
 
+        initializeRecyclerChips(binding.keyRecycler);
 
         detailViewModel = new ViewModelProvider(this, new DetailViewModelFactory(getDetailId())).get(DetailViewModel.class);
         binding.setViewModel(detailViewModel);
@@ -47,9 +57,18 @@ public class DetailHeadHunterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        detailViewModel.getHeadHunterBodyLiveData().observe(getViewLifecycleOwner(),
-                detailModelBody -> binding.setDetailModel(detailModelBody));
+        detailViewModel.getHeadHunterBodyLiveData().observe(getViewLifecycleOwner(), detailModelBody -> {
+            binding.setDetailModel(detailModelBody);
+            keySkillsAdapter.setList(detailModelBody.getKeySkills());
+        });
 
+    }
+
+    private void initializeRecyclerChips(RecyclerView recyclerView) {
+        list = new ArrayList<>();
+        keySkillsAdapter = new KeySkillsAdapter(list);
+        recyclerView.setAdapter(keySkillsAdapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
     }
 
     private String getDetailId() {

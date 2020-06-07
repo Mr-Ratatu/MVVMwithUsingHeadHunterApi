@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.headhunter.client.R;
 import com.headhunter.client.ui.adapter.HeadHunterAdapter;
 import com.headhunter.client.databinding.FragmentMainBinding;
+import com.headhunter.client.utils.Constant;
 import com.headhunter.client.viewmodel.main.HeadHunterViewModel;
 import com.headhunter.client.viewmodel.main.HunterViewModelFactory;
 
@@ -36,7 +37,7 @@ public class MainFragment extends Fragment {
 
         //Отредактировать
         headHunterViewModel = new ViewModelProvider(this, new HunterViewModelFactory(getActivity().getApplication(),
-                1, "android")).get(HeadHunterViewModel.class);
+                1, "android", this)).get(HeadHunterViewModel.class);
 
         binding.setViewModel(headHunterViewModel);
 
@@ -58,6 +59,28 @@ public class MainFragment extends Fragment {
 
         recyclerView.setAdapter(headHunterAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    public void showBottomDialog() {
+        FilterBottomDialogFragment bottomDialogFragment = new FilterBottomDialogFragment();
+        bottomDialogFragment.show(getChildFragmentManager(), "dialog");
+    }
+
+    private String getTitleVacancy() {
+        String vacancy;
+
+        try {
+            if (getArguments().getString(Constant.VACANCY) == null) {
+                vacancy = "";
+            } else {
+                vacancy = getArguments().getString(Constant.VACANCY);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            vacancy = "";
+        }
+
+        return vacancy;
     }
 
 }

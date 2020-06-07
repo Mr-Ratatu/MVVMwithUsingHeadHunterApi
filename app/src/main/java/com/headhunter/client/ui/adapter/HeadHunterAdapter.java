@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.headhunter.client.R;
-import com.headhunter.client.utils.NetworkState;
 import com.headhunter.client.viewmodel.item.MainItemViewModel;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.databinding.HeadHunterItemBinding;
@@ -22,7 +21,6 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
 
     public static final int MOVIE_ITEM_VIEW_TYPE = 1;
     public static final int LOAD_ITEM_VIEW_TYPE = 0;
-    private NetworkState networkState;
 
     public HeadHunterAdapter() {
         super(ItemHunter.CALLBACK);
@@ -39,15 +37,6 @@ public class HeadHunterAdapter extends PagedListAdapter<ItemHunter, HeadHunterAd
     @Override
     public void onBindViewHolder(@NonNull HeadHunterViewHolder holder, int position) {
         holder.bind(getItem(position));
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return (isLoadingData() && position == getItemCount() - 1) ? LOAD_ITEM_VIEW_TYPE : MOVIE_ITEM_VIEW_TYPE;
-    }
-
-    public boolean isLoadingData() {
-        return (networkState != null && networkState != NetworkState.LOADED);
     }
 
     static class HeadHunterViewHolder extends RecyclerView.ViewHolder {
