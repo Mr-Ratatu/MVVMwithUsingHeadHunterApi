@@ -51,13 +51,20 @@ public class Salary {
         this.gross = gross;
     }
 
+    private String getSignMoney() {
+        if (getCurrency().equals("USD"))
+            return "$";
+        else
+            return "₽";
+    }
+
     public String getExpectedSalary() {
         if (getTo() == 0) {
-            return "от " + getFrom() + " ₽ на руки";
+            return "от " + getFrom() + " " + getSignMoney() + " на руки";
         } else if (getFrom() == 0) {
-            return "до " + getTo() + " ₽ на руки";
+            return "до " + getTo() + " " + getSignMoney() + " на руки";
         } else {
-            return getFrom() + " - " + getTo() + " ₽ на руки";
+            return getFrom() + " - " + getTo() + " " + getSignMoney() + " на руки";
         }
     }
 

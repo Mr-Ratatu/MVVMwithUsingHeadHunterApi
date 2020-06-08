@@ -8,4 +8,5 @@
     <color name="title_color">#656565</color>
     <color name="edit_text_color">#DDDDDD</color>
     <color name="open_vacancy">#64D568</color>
+    <color name="background_color">#F7F7F7</color>
 </resources>

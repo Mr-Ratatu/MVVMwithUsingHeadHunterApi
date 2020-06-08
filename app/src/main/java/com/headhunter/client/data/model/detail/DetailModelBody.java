@@ -1,6 +1,8 @@
 
 package com.headhunter.client.data.model.detail;
 
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -11,6 +13,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.text.HtmlCompat;
 import androidx.databinding.BindingAdapter;
 
 public class DetailModelBody {
@@ -388,6 +391,10 @@ public class DetailModelBody {
 
     public void setKeySkills(List<KeySkill> keySkills) {
         this.keySkills = keySkills;
+    }
+
+    public Spanned getHtmlDescriptionText() {
+        return Html.fromHtml(getDescription());
     }
 
     @BindingAdapter("companyLogo")

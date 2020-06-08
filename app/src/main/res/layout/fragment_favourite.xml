@@ -16,9 +16,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="7dp">
+        android:background="@color/background_color"
+        android:paddingStart="7dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="7dp">
 
         <TextView
             android:id="@+id/my_list_text"

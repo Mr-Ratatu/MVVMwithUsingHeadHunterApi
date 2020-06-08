@@ -76,7 +76,7 @@
                     android:id="@+id/description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text='@{mainViewModel.snippetResponsibility ?? ""}'
+                    android:text='@{mainViewModel.snippetResponsibility}'
                     android:textColor="@color/text_color"
                     android:textSize="16sp" />
             </LinearLayout>
