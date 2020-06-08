@@ -137,6 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
                     android:visibility="@{detailModel.cardViewVisible()}"
                     app:cardCornerRadius="3dp"
                     app:layout_constraintBottom_toBottomOf="@+id/linearLayout"

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_favourite"
             app:destination="@id/favouritesFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_filterVacancyFragment"
+            app:destination="@id/filterVacancyFragment" />
     </fragment>
 
     <fragment
@@ -35,5 +38,13 @@
         <action
             android:id="@+id/action_favouritesFragment_to_detailHeadHunterFragment"
             app:destination="@id/detailHeadHunterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filterVacancyFragment"
+        android:name="com.headhunter.client.ui.fragment.FilterVacancyFragment"
+        android:label="Фильтр" >
+        <action
+            android:id="@+id/action_filterVacancyFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
 </navigation>

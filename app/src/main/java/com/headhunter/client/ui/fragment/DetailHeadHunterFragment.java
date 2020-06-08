@@ -37,7 +37,6 @@ public class DetailHeadHunterFragment extends Fragment {
     private DetailViewModel detailViewModel;
     private FragmentDetailHeadHunterBinding binding;
     private KeySkillsAdapter keySkillsAdapter;
-    private List<KeySkill> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,7 +64,7 @@ public class DetailHeadHunterFragment extends Fragment {
     }
 
     private void initializeRecyclerChips(RecyclerView recyclerView) {
-        list = new ArrayList<>();
+        List<KeySkill> list = new ArrayList<>();
         keySkillsAdapter = new KeySkillsAdapter(list);
         recyclerView.setAdapter(keySkillsAdapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));

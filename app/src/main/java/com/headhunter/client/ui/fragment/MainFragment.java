@@ -37,7 +37,7 @@ public class MainFragment extends Fragment {
 
         //Отредактировать
         headHunterViewModel = new ViewModelProvider(this, new HunterViewModelFactory(getActivity().getApplication(),
-                1, "android", this)).get(HeadHunterViewModel.class);
+                1, getTitleVacancy())).get(HeadHunterViewModel.class);
 
         binding.setViewModel(headHunterViewModel);
 
@@ -59,11 +59,6 @@ public class MainFragment extends Fragment {
 
         recyclerView.setAdapter(headHunterAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
-
-    public void showBottomDialog() {
-        FilterBottomDialogFragment bottomDialogFragment = new FilterBottomDialogFragment();
-        bottomDialogFragment.show(getChildFragmentManager(), "dialog");
     }
 
     private String getTitleVacancy() {

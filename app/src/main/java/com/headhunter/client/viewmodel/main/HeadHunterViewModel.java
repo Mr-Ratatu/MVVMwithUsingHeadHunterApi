@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 import android.view.View;
 
+import com.headhunter.client.R;
 import com.headhunter.client.ui.adapter.HeadHunterAdapter;
 import com.headhunter.client.data.paging.HeadHunterSourceFactory;
 import com.headhunter.client.data.model.ItemHunter;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableInt;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.navigation.Navigation;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,13 +27,11 @@ public class HeadHunterViewModel extends AndroidViewModel {
 
     private HeadHunterSourceFactory headHunterSourceFactory;
     private LiveData<PagedList<ItemHunter>> pagedListLiveData;
-    private MainFragment mainFragment;
     private ObservableInt error;
     private ObservableInt loadingContent;
 
-    public HeadHunterViewModel(@NonNull Application application, int area, String text, MainFragment mainFragment) {
+    public HeadHunterViewModel(@NonNull Application application, int area, String text) {
         super(application);
-        this.mainFragment = mainFragment;
         headHunterSourceFactory = new HeadHunterSourceFactory(area, text);
 
         PagedList.Config config = (new PagedList.Config.Builder())
@@ -67,7 +67,7 @@ public class HeadHunterViewModel extends AndroidViewModel {
         return loadingContent;
     }
 
-    public void onDialogShowListener() {
-        mainFragment.showBottomDialog();
+    public void onShowFilterScreen(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_filterVacancyFragment);
     }
 }
