@@ -1,5 +1,6 @@
 package com.headhunter.client.viewmodel.favourite;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.headhunter.client.data.db.HeadHunterDao;
@@ -9,13 +10,18 @@ import com.headhunter.client.data.model.ItemHunter;
 import java.util.List;
 
 import androidx.lifecycle.LiveData;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class FavouriteRepository {
 
     private static FavouriteRepository INSTANCE;
     private HeadHunterDao headHunterDao;
-    private LiveData<List<ItemHunter>> listLiveData;
-    private LiveData<Integer> checkDB;
+    private CompositeDisposable compositeDisposable;
 
     public static FavouriteRepository getInstance(Context context) {
         if (INSTANCE == null) {
@@ -27,25 +33,41 @@ public class FavouriteRepository {
 
     private FavouriteRepository(Context context) {
         headHunterDao = HeadHunterDataBase.getInstance(context).getHeadHunterDao();
-        listLiveData = headHunterDao.getAllFavouriteVacancy();
-        checkDB = headHunterDao.getCheckDB();
+        compositeDisposable = new CompositeDisposable();
     }
 
-    public LiveData<Integer> getCheckDB() {
-        return checkDB;
+    public Observable<Integer> getCheckDB() {
+        return headHunterDao.getCheckDB()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(Throwable::printStackTrace);
     }
 
-    LiveData<List<ItemHunter>> getListLiveData() {
-        return listLiveData;
+    @SuppressLint("CheckResult")
+    public Observable<List<ItemHunter>> getListLiveData() {
+        return headHunterDao.getAllFavouriteVacancy()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(Throwable::printStackTrace);
     }
 
-    public void insertHunter(final ItemHunter itemHunters) {
-        HeadHunterDataBase.databaseWriteExecutor.execute(() -> headHunterDao.insert(itemHunters));
+    public void insertHunter(ItemHunter itemHunters) {
+        compositeDisposable.add(headHunterDao.insert(itemHunters)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(Throwable::printStackTrace)
+                .subscribe());
     }
 
     public void deleteHunter(ItemHunter itemHunter) {
-        HeadHunterDataBase.databaseWriteExecutor.execute(() -> {
-            headHunterDao.delete(itemHunter);
-        });
+        compositeDisposable.add(headHunterDao.delete(itemHunter)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnError(Throwable::printStackTrace)
+                .subscribe());
+    }
+
+    public CompositeDisposable getCompositeDisposable() {
+        return compositeDisposable;
     }
 }

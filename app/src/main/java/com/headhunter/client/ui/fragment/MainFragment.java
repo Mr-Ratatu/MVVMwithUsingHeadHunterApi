@@ -65,11 +65,7 @@ public class MainFragment extends Fragment {
         String vacancy;
 
         try {
-            if (getArguments().getString(Constant.VACANCY) == null) {
-                vacancy = "";
-            } else {
-                vacancy = getArguments().getString(Constant.VACANCY);
-            }
+            vacancy = getArguments().getString(Constant.VACANCY);
         } catch (NullPointerException e) {
             e.printStackTrace();
             vacancy = "";

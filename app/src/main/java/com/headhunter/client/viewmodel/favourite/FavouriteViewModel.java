@@ -15,37 +15,32 @@ import androidx.databinding.ObservableInt;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class FavouriteViewModel extends AndroidViewModel {
 
     private FavouriteRepository favouriteRepository;
-    private LiveData<List<ItemHunter>> listLiveData;
-    private static LiveData<Integer> checkDB;
+    private CompositeDisposable compositeDisposable;
 
     public FavouriteViewModel(@NonNull Application application) {
         super(application);
 
         favouriteRepository = FavouriteRepository.getInstance(application);
-        listLiveData = favouriteRepository.getListLiveData();
-        checkDB = favouriteRepository.getCheckDB();
+        compositeDisposable = favouriteRepository.getCompositeDisposable();
     }
 
-    public LiveData<Integer> getCheckDB() {
-        return checkDB;
+    public Observable<Integer> getCheckDB() {
+        return favouriteRepository.getCheckDB();
     }
 
-    public LiveData<List<ItemHunter>> getListLiveData() {
-        return listLiveData;
+    public Observable<List<ItemHunter>> getListLiveData() {
+        return favouriteRepository.getListLiveData();
     }
 
-
-    /*@BindingAdapter("app:visibleText")
-    public void visibleText(TextView textView, LiveData<Integer> value) {
-        if (value.getValue() > 0) {
-            textView.setVisibility(View.VISIBLE);
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-    }*/
+    public CompositeDisposable getCompositeDisposable() {
+        return compositeDisposable;
+    }
 
 }

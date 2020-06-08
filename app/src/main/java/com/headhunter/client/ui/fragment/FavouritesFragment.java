@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import io.reactivex.functions.Consumer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,8 +44,13 @@ public class FavouritesFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        viewModel.getListLiveData().observe(getViewLifecycleOwner(), itemHunters -> favouriteAdapter.submitList(itemHunters));
-        viewModel.getCheckDB().observe(getViewLifecycleOwner(), this::checkOnEmptyDataBase);
+        viewModel.getCompositeDisposable()
+                .add(viewModel.getListLiveData().doOnNext(
+                        itemHunters -> favouriteAdapter.submitList(itemHunters))
+                        .subscribe());
+
+        viewModel.getCompositeDisposable()
+                .add(viewModel.getCheckDB().doOnNext(this::checkOnEmptyDataBase).subscribe());
 
     }
 

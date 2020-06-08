@@ -10,19 +10,22 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
+import io.reactivex.Observable;
 
 @Dao
 public interface HeadHunterDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(ItemHunter itemHunter);
+    Completable insert(ItemHunter itemHunter);
 
     @Delete
-    void delete(ItemHunter itemHunter);
+    Completable delete(ItemHunter itemHunter);
 
     @Query("SELECT * FROM item_db")
-    LiveData<List<ItemHunter>> getAllFavouriteVacancy();
+    Observable<List<ItemHunter>> getAllFavouriteVacancy();
 
     @Query("SELECT COUNT(*) FROM item_db")
-    LiveData<Integer> getCheckDB();
+    Observable<Integer> getCheckDB();
 
 }

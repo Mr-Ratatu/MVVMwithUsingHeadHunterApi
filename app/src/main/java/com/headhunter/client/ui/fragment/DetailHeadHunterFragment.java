@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,7 +68,7 @@ public class DetailHeadHunterFragment extends Fragment {
         List<KeySkill> list = new ArrayList<>();
         keySkillsAdapter = new KeySkillsAdapter(list);
         recyclerView.setAdapter(keySkillsAdapter);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
+        recyclerView.setLayoutManager(getGridLayoutManager());
     }
 
     private String getDetailId() {
@@ -80,5 +81,17 @@ public class DetailHeadHunterFragment extends Fragment {
         }
 
         return id;
+    }
+
+    private GridLayoutManager getGridLayoutManager() {
+        GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 1 || position == 6 ? 2 : 1;
+            }
+        });
+
+        return manager;
     }
 }
