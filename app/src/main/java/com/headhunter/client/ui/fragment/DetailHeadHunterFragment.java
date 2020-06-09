@@ -5,22 +5,16 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.headhunter.client.R;
-import com.headhunter.client.data.model.ItemHunter;
-import com.headhunter.client.data.model.detail.DetailModelBody;
 import com.headhunter.client.data.model.detail.KeySkill;
-import com.headhunter.client.data.network.responce.HeadHunterBody;
 import com.headhunter.client.databinding.FragmentDetailHeadHunterBinding;
 import com.headhunter.client.ui.adapter.KeySkillsAdapter;
 import com.headhunter.client.utils.Constant;
@@ -94,4 +88,5 @@ public class DetailHeadHunterFragment extends Fragment {
 
         return manager;
     }
+
 }

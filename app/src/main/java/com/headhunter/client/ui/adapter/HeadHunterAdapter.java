@@ -9,9 +9,6 @@ import com.headhunter.client.viewmodel.item.MainItemViewModel;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.databinding.HeadHunterItemBinding;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.paging.PagedListAdapter;

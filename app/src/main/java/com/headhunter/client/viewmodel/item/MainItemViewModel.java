@@ -2,23 +2,16 @@ package com.headhunter.client.viewmodel.item;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Html;
-import android.text.Spanned;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.headhunter.client.R;
 import com.headhunter.client.databinding.HeadHunterItemBinding;
-import com.headhunter.client.ui.adapter.HeadHunterAdapter;
 import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.utils.Constant;
 import com.headhunter.client.viewmodel.favourite.FavouriteRepository;
 
 import androidx.databinding.BaseObservable;
-import androidx.databinding.BindingAdapter;
 import androidx.navigation.Navigation;
 
 public class MainItemViewModel extends BaseObservable {

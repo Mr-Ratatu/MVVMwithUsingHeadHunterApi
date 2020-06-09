@@ -1,7 +1,6 @@
 package com.headhunter.client.viewmodel.main;
 
 import android.app.Application;
-import android.util.Log;
 import android.view.View;
 
 import com.headhunter.client.R;

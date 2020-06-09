@@ -23,6 +23,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +52,7 @@
                         android:paddingStart="10dp"
                         android:paddingTop="10dp"
                         android:paddingEnd="10dp"
-                        android:paddingBottom="70dp">
+                        android:paddingBottom="45dp">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/constraintLayout3"
@@ -104,6 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="@{detailModel.salary.expectedSalary}"
+                            android:textColor="@android:color/black"
                             android:textSize="20sp"
                             android:textStyle="bold"
                             android:visibility="@{detailModel.visibleTextSalary()}"
@@ -116,7 +118,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="Требуемый опыт:"
-                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
                             app:layout_constraintStart_toStartOf="@+id/linearLayout2"
                             app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
@@ -125,10 +128,21 @@
                             android:layout_height="wrap_content"
                             android:paddingStart="5dp"
                             android:text="@{detailModel.experience.name}"
-                            android:textSize="16sp"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
                             app:layout_constraintBottom_toBottomOf="@+id/textView4"
                             app:layout_constraintStart_toEndOf="@+id/textView4"
                             app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@{detailModel.scheduleInfo}"
+                            android:textColor="@android:color/black"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
@@ -157,8 +171,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
                     android:focusable="true"
+                    android:onClick="@{(view) -> viewModel.onOpenDetailInfoAboutCompany(view, detailModel.employer.id)}"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -175,7 +189,6 @@
                         android:text="@{detailModel.employer.name}"
                         android:textColor="@color/colorAccent"
                         android:textSize="18sp"
-                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
 

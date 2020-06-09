@@ -9,12 +9,9 @@ import com.headhunter.client.data.model.ItemHunter;
 
 import java.util.List;
 
-import androidx.lifecycle.LiveData;
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class FavouriteRepository {

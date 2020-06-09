@@ -17,11 +17,9 @@ public class FavouriteItemViewModel extends BaseObservable {
 
     private FavouriteRepository favouriteRepository;
     private ItemHunter itemHunter;
-    private Context context;
 
     public FavouriteItemViewModel(ItemHunter itemHunter, Context context) {
         this.itemHunter = itemHunter;
-        this.context = context;
 
         favouriteRepository = FavouriteRepository.getInstance(context);
     }
@@ -43,18 +41,15 @@ public class FavouriteItemViewModel extends BaseObservable {
     }
 
     public void deleteFromFavouriteClick(View view) {
-        PopupMenu popup = new PopupMenu(context, view);
+        PopupMenu popup = new PopupMenu(view.getContext(), view);
         popup.inflate(R.menu.settings_favourite);
 
         popup.setOnMenuItemClickListener(item -> {
-            switch (item.getItemId()) {
-                case R.id.delete_vacancy:
-                    favouriteRepository.deleteHunter(itemHunter);
-                    return true;
-
-                default:
-                    return false;
+            if (item.getItemId() == R.id.delete_vacancy) {
+                favouriteRepository.deleteHunter(itemHunter);
+                return true;
             }
+            return false;
         });
 
         popup.show();

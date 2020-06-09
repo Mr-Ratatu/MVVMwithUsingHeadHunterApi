@@ -12,12 +12,10 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableInt;
-import androidx.lifecycle.MutableLiveData;
 import androidx.paging.PageKeyedDataSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MyPositionalDataSource extends PageKeyedDataSource<Long, ItemHunter> {

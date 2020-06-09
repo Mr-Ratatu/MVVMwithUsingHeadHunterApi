@@ -1,8 +1,6 @@
 
 package com.headhunter.client.data.model;
 
-import android.util.Log;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

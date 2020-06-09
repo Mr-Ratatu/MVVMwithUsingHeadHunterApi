@@ -29,6 +29,9 @@
         <argument
             android:name="itemHunter"
             app:argType="com.headhunter.client.data.model.ItemHunter" />
+        <action
+            android:id="@+id/detail_icompany"
+            app:destination="@id/companyDetailInfoFragment" />
     </fragment>
 
     <fragment
@@ -47,4 +50,8 @@
             android:id="@+id/action_filterVacancyFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/companyDetailInfoFragment"
+        android:name="com.headhunter.client.ui.fragment.CompanyDetailInfoFragment"
+        android:label="" />
 </navigation>

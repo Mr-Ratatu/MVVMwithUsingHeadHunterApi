@@ -2,7 +2,6 @@ package com.headhunter.client.viewmodel.detail;
 
 import android.view.View;
 
-import com.headhunter.client.data.model.ItemHunter;
 import com.headhunter.client.data.model.detail.DetailModelBody;
 import com.headhunter.client.data.network.ApiFactory;
 import com.headhunter.client.data.network.ApiService;
@@ -12,7 +11,6 @@ import androidx.lifecycle.MutableLiveData;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class DetailRepository {

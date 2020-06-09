@@ -48,9 +48,8 @@ public class MainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        headHunterViewModel.getPagedListLiveData().observe(getViewLifecycleOwner(), itemHunters -> {
-            headHunterAdapter.submitList(itemHunters);
-        });
+        headHunterViewModel.getPagedListLiveData().observe(getViewLifecycleOwner(),
+                itemHunters -> headHunterAdapter.submitList(itemHunters));
 
     }
 
@@ -68,7 +67,7 @@ public class MainFragment extends Fragment {
             vacancy = getArguments().getString(Constant.VACANCY);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            vacancy = "";
+            vacancy = "android";
         }
 
         return vacancy;
