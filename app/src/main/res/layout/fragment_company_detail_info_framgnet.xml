@@ -108,6 +108,7 @@
                     android:layout_marginTop="10dp"
                     android:autoLink="web"
                     android:linksClickable="true"
+                    android:visibility="@{companyDetail.siteUrlVisible()}"
                     android:text="@{companyDetail.siteUrl}"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"

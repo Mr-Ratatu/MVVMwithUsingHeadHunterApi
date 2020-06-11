@@ -84,6 +84,14 @@ public class ItemHunter implements Serializable {
         this.area = area;
     }
 
+    public String getResponsibility() {
+        if (getSnippet().getResponsibility() == null) {
+            return "";
+        }
+
+        return getSnippet().getResponsibility();
+    }
+
     public static final DiffUtil.ItemCallback<ItemHunter> CALLBACK = new DiffUtil.ItemCallback<ItemHunter>() {
         @Override
         public boolean areItemsTheSame(@NonNull ItemHunter oldItem, @NonNull ItemHunter newItem) {

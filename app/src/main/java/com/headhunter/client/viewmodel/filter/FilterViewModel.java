@@ -22,9 +22,17 @@ public class FilterViewModel extends ViewModel {
         this.filterVacancyFragment = filterVacancyFragment;
     }
 
-    public void onSearchVacancyWithFilter(View view) {
+    private boolean checkFieldIsEmpty() {
         if (binding.titleVacancy.getEditText().getText().toString().trim().isEmpty()) {
-            Toast.makeText(view.getContext(), "Поля не могут быть пустыми", Toast.LENGTH_SHORT).show();
+            binding.titleVacancy.setError("Поле не может быть пустым");
+            return false;
+        }
+
+        return true;
+    }
+
+    public void onSearchVacancyClick(View view) {
+        if (!checkFieldIsEmpty()) {
             return;
         }
 

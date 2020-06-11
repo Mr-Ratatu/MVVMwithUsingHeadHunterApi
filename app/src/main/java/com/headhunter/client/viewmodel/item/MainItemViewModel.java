@@ -2,6 +2,8 @@ package com.headhunter.client.viewmodel.item;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Toast;
 
@@ -36,8 +38,8 @@ public class MainItemViewModel extends BaseObservable {
         return itemHunter.getEmployer().getName();
     }
 
-    public String getSnippetResponsibility() {
-        return itemHunter.getSnippet().getResponsibility();
+    public Spanned getSnippetResponsibility() {
+        return Html.fromHtml(itemHunter.getResponsibility());
     }
 
     public String getAreaName() {

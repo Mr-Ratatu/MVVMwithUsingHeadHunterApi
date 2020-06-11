@@ -84,6 +84,10 @@ public class CompanyInfoBody {
     }
 
     public String getDescription() {
+        if (description == null) {
+            return "Компания пока не добавила описания.";
+        }
+
         return description;
     }
 
@@ -163,4 +167,7 @@ public class CompanyInfoBody {
         return getLogoUrls() == null ? View.GONE : View.VISIBLE;
     }
 
+    public int siteUrlVisible() {
+        return getSiteUrl() == null ? View.GONE : View.VISIBLE;
+    }
 }
